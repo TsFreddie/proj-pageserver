@@ -67,13 +67,17 @@ def respond(sock):
 
     parts = request.split()
     if len(parts) > 1 and parts[0] == "GET":
-        transmit(STATUS_OK, sock)
         path = parts[1]
-        if os.path.isfile("pages" + path) and "/" in path and ".." not in path:
+        if "//" in path or ".." in path or "~" in path:
+            transmit(STATUS_FORBIDDEN, sock)
+            transmit("403 Forbidden", sock)
+        elif os.path.isfile("pages" + path):
             file = open("pages" + path)
+            transmit(STATUS_OK, sock)
             transmit(file.read(), sock)
         else:
             transmit(STATUS_NOT_FOUND, sock)
+            transmit("404 Not Found", sock)
     else:
         transmit(STATUS_NOT_IMPLEMENTED, sock)        
         transmit("\nI don't handle this request: {}\n".format(request), sock)

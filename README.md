@@ -26,4 +26,14 @@ A "getting started" project for CIS 322, software engineering 1 at University of
 * Maintained by Michal Young, michal@cs.uoregon.edu
 * Use our Piazza group for questions. Make them public (anonymous or not as you prefer) unless you have a good reason to make them private, so that everyone benefits from answers and discussion. 
 
+### Deployment ###
+
+```bash
+git clone https://github.com/TsFreddie/proj-pageserver
+cd proj-pageserver
+make configure
+make run
+```
+You may want to edit CONFIG.py to change port.
+
 ### Author: Freddie Wang, nwang@uoregon.edu

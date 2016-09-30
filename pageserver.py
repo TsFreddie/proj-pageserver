@@ -68,7 +68,8 @@ def respond(sock):
     parts = request.split()
     if len(parts) > 1 and parts[0] == "GET":
         path = parts[1]
-        if "//" in path or ".." in path or "~" in path:
+        ext = os.path.splitext(parts[1])[1]
+        if "//" in path or ".." in path or "~" in path or (ext != ".html" and ext != ".css"):
             transmit(STATUS_FORBIDDEN, sock)
             transmit("403 Forbidden", sock)
         elif os.path.isfile("pages" + path):

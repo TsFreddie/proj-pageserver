@@ -1,39 +1,35 @@
-# README #
+# Simple Page-serving WebServer #
 
-A "getting started" project for CIS 322, software engineering 1 at University of Oregon.
+* This is a project for uoregon CIS 322.
 
-### What is this repository for? ###
+### Author: Freddie Wang ###
 
-* The objectives of this mini-project are:
-  * Initial experience with GIT workflow:  Fork the project, make and test changes locally, commit;  turn in repository URL
-  * Initial experience with automated configuration for turnkey installation
-  * Extend a tiny web server in Python, to check understanding of basic web architecture
-  * Use automated tests to check progress (plus manual tests for good measure)
+* Email: nwang@uoregon.edu
 
-### What do I need?  Where will it work? ###
+### Features & Specifics ###
 
-* Designed for Unix, mostly interoperable on Linux (Ubuntu) or MacOS.
-  Target environment is Raspberry Pi. 
-  ** May also work on Windows, but no promises.  A Linux virtual machine
-   may work, but our experience has not been good; if you don't have a 
-   Raspberry Pi in hand yet, you may want to test on shared server ix. 
-* You will need Python version 3.4 or higher. 
-* Designed to work in "user mode" (unprivileged), therefore using a port 
-  number above 1000 (rather than port 80 that a privileged web server would use)
-
-### Who do I talk to? ###
-
-* Maintained by Michal Young, michal@cs.uoregon.edu
-* Use our Piazza group for questions. Make them public (anonymous or not as you prefer) unless you have a good reason to make them private, so that everyone benefits from answers and discussion. 
+* The webserver will serve __only__ *html* and *css* files.
+* All pages should be stored in *./pages/* directory to be correctly served.
+* The server support following status upon each connection:
+ * 200 - Everything is OK
+ * 401 - Not implemented
+ * 403 - Forbidden (if the url contains '//', '..', or '~' or if the page you are trying to reach is not a html or css page)
+ * 404 - Not found
 
 ### Deployment ###
-
+* The default webserver port is 8000.
+* You may want to edit CONFIG.py to change port.
 ```bash
 git clone https://github.com/TsFreddie/proj-pageserver
 cd proj-pageserver
 make configure
 make run
 ```
-You may want to edit CONFIG.py to change port.
 
-### Author: Freddie Wang, nwang@uoregon.edu
+### Testing ###
+* The default testing shell script is provided in ./test/ directory.
+* The test need to be able to fetch *trivia.html* and *trivia.css* to behave as intended.
+* __You can modify the *tests.sh* file to suit specific testing needs.__
+```bash
+./tests.sh http://127.0.0.1:8000
+```
